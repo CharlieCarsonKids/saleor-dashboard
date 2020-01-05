@@ -1,7 +1,5 @@
 {
   "root": "build/dashboard/",
-  "https_only": true,
-  "canonical_host": "${HOST}",
   "routes": {
     "/**": "index.html"
   }
