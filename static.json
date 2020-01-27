@@ -1,7 +1,6 @@
 {
   "root": "build/dashboard/",
   "routes": {
-    "/*.js": "/",
     "/**": "index.html"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "charlie-carson-kids-dashboard",
+  "name": "charliecarsonkids-admin-prod",
   "description": "A GraphQL-powered, single-page dashboard application for Saleor",
   "repository": "https://github.com/mirumee/saleor-dashboard",
   "website": "http://getsaleor.com/",
@@ -8,11 +8,15 @@
   "env": {
     "API_URI": {
       "description": "URI of a running instance of Saleor GraphQL API",
-      "value": "https://charlie-carson-kids-saleor.herokuapp.com/graphql/"
+      "value": "https://api.charliecarsonkids.com/graphql/"
     },
     "APP_MOUNT_URI": {
       "description": "URI at which the Dashboard app will be mounted",
-      "value": "/dashboard/"
+      "value": "/"
+    },
+    "STATIC_URL": {
+      "description": "URI of static assets",
+      "value": "https://static.charliecarsonkids.com/dashboard/"
     }
   },
   "buildpacks": [
