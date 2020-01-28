@@ -4,6 +4,7 @@ const CheckerPlugin = require("fork-ts-checker-webpack-plugin");
 const webpack = require("webpack");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const S3Plugin = require("webpack-s3-plugin");
 
 require("dotenv").config();
 
@@ -35,8 +36,8 @@ module.exports = (env, argv) => {
   let fileLoaderPath;
   let output;
 
-  if(!process.env.API_URI) {
-    throw new Error("Environment variable API_URI not set")
+  if (!process.env.API_URI) {
+    throw new Error("Environment variable API_URI not set");
   }
 
   if (!devMode) {
@@ -98,7 +99,22 @@ module.exports = (env, argv) => {
       splitChunks: false
     },
     output,
-    plugins: [checkerPlugin, environmentPlugin, htmlWebpackPlugin],
+    plugins: [
+      checkerPlugin,
+      environmentPlugin,
+      htmlWebpackPlugin,
+      new S3Plugin({
+        include: /.*\.(css|js|svg|png|html)/,
+        s3Options: {
+          accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+          secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+        },
+        s3UploadOptions: {
+          Bucket: "static.charliecarsonkids.com"
+        },
+        basePath: "dashboard"
+      })
+    ],
     resolve: {
       extensions: [".js", ".jsx", ".ts", ".tsx"],
       plugins: [pathsPlugin]
